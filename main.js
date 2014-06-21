@@ -9,7 +9,7 @@ var Store = require("jfs");
 var db = new Store("data");
 
 // Configuration
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/three.js'));
 app.use(bodyParser());
 app.use(bodyParser.json({ type: 'application/json' }))
 
@@ -23,7 +23,9 @@ app.get('/scene/:id', function(req, res) {
 
 app.post('/scene/', function(req, res) {
   var id = uuid.v1();
-  var newScene = {};
+  var newScene = {
+    object: {}
+  };
   db.save(id, newScene, function(err) {
     if (err) throw err;
     res.send(id);
